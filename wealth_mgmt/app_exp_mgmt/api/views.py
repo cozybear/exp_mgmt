@@ -1,12 +1,25 @@
 from django.shortcuts import render
 from django.db.models import Sum, Aggregate
-from app_exp_mgmt.models import Expense
+from app_exp_mgmt.models import Expense, ExpenseCategoryChoice
 from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from app_exp_mgmt.api.serializers import (ExpenseSerializer, TotalExpenseSerializer,
-                                          ExpenseByCategorySerializer, ExpenseByMonthSerializer)
+                                          ExpenseByCategorySerializer, ExpenseByMonthSerializer,
+                                          ExpenseCategoryChoiceSerializer )
 import calendar
+
+
+class AddExpenseCategory(generics.CreateAPIView):
+
+    serializer_class = ExpenseCategoryChoiceSerializer
+    queryset = ExpenseCategoryChoice.objects.all()
+    
+
+class ListExpenseCategory(generics.ListAPIView):
+
+    serializer_class = ExpenseCategoryChoiceSerializer
+    queryset = ExpenseCategoryChoice.objects.all()
 
 class AddExpense(generics.CreateAPIView):
 

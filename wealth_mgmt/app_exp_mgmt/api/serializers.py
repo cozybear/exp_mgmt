@@ -1,7 +1,14 @@
 from rest_framework import serializers
-from app_exp_mgmt.models import Expense
+from app_exp_mgmt.models import Expense, ExpenseCategoryChoice
 from django.db.models import Sum
 from rest_framework.response import Response
+
+
+class ExpenseCategoryChoiceSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = ExpenseCategoryChoice
+        fields = "__all__"
 
 
 class ExpenseSerializer(serializers.ModelSerializer):
